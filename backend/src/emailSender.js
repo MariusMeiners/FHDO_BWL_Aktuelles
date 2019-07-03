@@ -1,7 +1,7 @@
 const nodeMailer = require("nodemailer");
 require("dotenv").config();
 
-module.exports.sendMail = () => {
+module.exports.sendMail = (subject, message) => {
   let transporter = nodeMailer.createTransport({
     host: process.env.EMAIL_SMTP_HOST,
     port: process.env.EMAIL_SMTP_PORT,
@@ -26,6 +26,7 @@ module.exports.sendMail = () => {
       console.log(error);
       res.status(400).send({ success: false });
     } else {
+      console.log(res)
       res.status(200).send({ success: true });
     }
   });
