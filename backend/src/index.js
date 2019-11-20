@@ -4,13 +4,13 @@ const DB = require("./db.js");
 require("dotenv").config();
 
 const mainLoop = async () => {
-  // const currentNewsObject = await RssParser.getCurrentNewsObject();
+  const currentNewsObject = await RssParser.getCurrentNewsObject();
   // console.log(currentNewsObject);
   // EmailSender.sendMail();
-  DB.connect();
+  // DB.connect();
 };
 
 mainLoop();
 
-//main loop
+// main loop
 // setInterval(mainLoop, 15000);
