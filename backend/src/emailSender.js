@@ -1,7 +1,7 @@
 const nodeMailer = require("nodemailer");
 require("dotenv").config();
 
-module.exports.sendMail = (subject, message) => {
+module.exports.sendMail = async newsItem => {
   let transporter = nodeMailer.createTransport({
     host: process.env.EMAIL_SMTP_HOST,
     port: process.env.EMAIL_SMTP_PORT,
@@ -21,13 +21,6 @@ module.exports.sendMail = (subject, message) => {
     html: "<b>Hello world?</b>" // html body
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-      res.status(400).send({ success: false });
-    } else {
-      console.log(res)
-      res.status(200).send({ success: true });
-    }
-  });
+  const info = await transporter.sendMail(mailOptions);
+  return info;
 };

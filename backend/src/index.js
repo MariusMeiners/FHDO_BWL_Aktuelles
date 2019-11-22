@@ -1,16 +1,15 @@
 const EmailSender = require("./emailSender.js");
-const RssParser = require("./rssParserFromFeed.js");
-const DB = require("./db.js");
-require("dotenv").config();
+const evaluator = require("./evaluator");
 
-const mainLoop = async () => {
-  const currentNewsObject = await RssParser.getCurrentNewsObject();
-  // console.log(currentNewsObject);
-  // EmailSender.sendMail();
-  // DB.connect();
+const oldNewsObjects = evaluator.evaluate([]).allNewsItems;
+
+const mainLoop = () => {
+  const newNewsItems = evaluator.evaluate(oldNewsObjects).newNewsItems;
+  console.log(newItems);
+  if (newNewsItems) {
+    newNewsItems.forEach(EmailSender.sendMail);
+  }
 };
 
-mainLoop();
-
 // main loop
-// setInterval(mainLoop, 15000);
+setInterval(mainLoop, 15000);
